@@ -25,8 +25,8 @@ To construct a Deep Learning framework capable of predicting expert moves in the
 
 **The Roadmap:**
 * **Phase I (Current):** Data ingestion, SGF parsing, and the training of a foundational Convolutional Neural Network (CNN) to mimic professional intuition.
-* **Phase II (Upcoming):** Integration of Saliency Maps and Grad-CAM techniques to visualize the "Why" behind the "Where."
-* **Phase III (Future):** Alignment with the **GameTable COST Action** research goals, focusing on the cognitive implications of AI move generation.
+* **Phase II (Upcoming 2026):** Integration of Saliency Maps and Grad-CAM techniques to visualize the "Why" behind the "Where."
+* **Phase III (Future 2027 - 2028):** Alignment with the **GameTable COST Action** research goals, focusing on the cognitive implications of AI move generation.
 
 ### The Methodology
 
@@ -47,7 +47,7 @@ Following the completion of Phase I, I intend to apply the findings of this rese
 
 This work is part of an ongoing academic thesis. While the code is visible for review by the academic community, all rights are reserved pending the final submission of the graduation project.
 
-* **Advisor:** [Advisor Name]
+* **Advisor:** Dr. Gamze TÜRKMEN
 * **Institution:** Manisa Celal Bayar University
 * **Timeline:** 2025 - 2026
 
