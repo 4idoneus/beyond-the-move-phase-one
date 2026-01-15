@@ -402,36 +402,58 @@ elif page == "3. Model Metrics":
                 stats = json.load(f)
             
             # Display 4 Metrics side-by-side
-            c1, c2, c3 = st.columns(3)
-            c1.metric("Games Learned", stats.get('total_games_available', 0))
-            t_loss = stats.get('final_train_loss', 0)
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Games Learned", stats.get('total_games', 0))
+            
+            # Highlighting the Validation Gap
+            t_loss = stats.get('train_loss', 0.0)
+            v_loss = stats.get('val_loss', 0.0)
+            delta = v_loss - t_loss
             
             c2.metric("Train Loss", f"{t_loss:.4f}")
-
-            c3.metric("Training Time", f"{stats.get('training_time_min', 0)} min")
+            c3.metric("Validation Loss", f"{v_loss:.4f}", delta=f"{delta:.4f} gap", delta_color="inverse")
+            c4.metric("Training Time", f"{stats.get('training_time_min', 0)} min")
+            
+            # Display the Graph (Train vs Val)
+            if os.path.exists("assets/training_graph_final.png"):
+                st.image("assets/training_graph_final.png", caption="Loss Convergence (Lower is Better)", use_container_width=True)
+                st.info("""
+                **How to read this graph:**
+                * **Blue Line (Train):** How well the model memorizes the study material.
+                * **Orange Line (Validation):** How well the model plays against new opponents.
+                * **Goal:** Both lines should go down together. If Orange goes up while Blue goes down, the AI is overfitting (memorizing).
+                """)
+            else:
+                st.warning("Training graph not found.")
         else:
-            st.warning("No training stats found. Please run src/train.py first.")
+            st.warning("No stats found. Run src/train.py first.")
 
      # TAB 2: DATA ANALYSIS
     with tab2:
         st.subheader("Raw Data Distribution (Fuseki)")
         st.markdown("This heatmap visualizes the **Global Move Probability** derived from the raw professional dataset (FoxGo). It answers: *Where do Pros play?*")
+        st.info("Because I did not push the processed data due to size and privacy concerns. Please run src/process.py to generate the necessary files in 'data/processed/' for this analysis.")
         
         if st.button("Generate Dataset Heatmap"):
             with st.spinner("Scanning processed tensors..."):
-                # Reuse the function defined at the top of app.py
+                
                 global_hm = compute_dataset_stats()
                 
             if global_hm is not None:
                 fig, ax = plt.subplots(figsize=(6,6))
                 # Use a heat-color map
                 sns.heatmap(global_hm, cmap="inferno", square=True, cbar=True, ax=ax, xticklabels=False, yticklabels=False)
-                ax.invert_yaxis() # Go board row 1 is at bottom
+                ax.invert_yaxis() # So (0,0) is bottom-left
                 ax.set_title("Professional Move Distribution (First 100 Games Sample)")
                 st.pyplot(fig)
                 st.caption("Brighter areas indicate higher move frequency (Corners are most popular).")
             else:
                 st.error("No processed data found in 'data/processed/'. Run src/process.py first.")
+        st.divider()
+        st.info("Here is a sample heatmap from a pre-processed dataset for demonstration purposes." \
+        " (Not generated live)")
+        if os.path.exists("assets/sample_dataset_heatmap.png"):
+            st.image("assets/sample_dataset_heatmap.png", caption="Sample Professional Move Distribution", use_container_width=True)
 # ---------------------- PAGE 4: ROADMAP ----------------------
 elif page == "4. Roadmap & Researcher":
     st.title("📍 Project Roadmap & Researcher Profile")

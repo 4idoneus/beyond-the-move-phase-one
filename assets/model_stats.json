@@ -1,1 +1,1 @@
-{"total_games_available": 157639, "chunk_size": 15000, "final_loss": 36.373592376708984, "training_time_min": 304.4}
+{"total_games": 157639, "train_loss": 2.4568053609610367, "val_loss": 2.5359693689081952, "training_time_min": 240.0}
