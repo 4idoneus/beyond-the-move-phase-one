@@ -1,56 +1,74 @@
-# Beyond the Move: Phase I
+# Beyond the Move 
 
-> **Felix qui potuit rerum cognoscere causas.**
-> *"Happy is he who is able to know the causes of things."* — Virgil
+> *Felix qui potuit rerum cognoscere causas.* > "Happy is he who is able to know the causes of things." — Virgil
+>
+> *初心忘るべからず (Shoshin wasuru bekarazu)* > "Never forget the beginner's spirit." — Zeami Motokiyo
 
-> **初心忘るべからず** (Shoshin wasuru bekarazu)
-> *"Never forget the beginner's spirit."* — Zeami Motokiyo
+[![Project Status: Phase I Completed](https://img.shields.io/badge/Phase%20I-Completed-success)](https://github.com/4idoneus)
+[![Framework](https://img.shields.io/badge/PyTorch-ResNet18-red)](https://pytorch.org/)
+[![XAI](https://img.shields.io/badge/XAI-Integrated%20Gradients-blue)](https://captum.ai/)
+[![License](https://img.shields.io/badge/License-Academic-lightgrey)]()
+
+##  Abstract
+
+**Current AI engines are Oracles, not Tutors.**
+While Deep Reinforcement Learning (DRL) agents like AlphaGo have achieved superhuman performance, they operate as "Black Boxes." They provide optimal moves but offer minimal transparency regarding their strategic rationale. This creates an **"Epistemic Gap"** where human learners can observe *what* the AI plays, but cannot understand *why*.
+
+**Beyond the Move** is an Explainable AI (XAI) framework designed to bridge this gap. This project dismantles the barrier between silicon calculation and human understanding, translating the silent probability of a neural network into the articulate language of strategy. By visualising **"Interaction Primitives"** via heatmaps, this system acts as a "Glass Box" tool for cognitive skill acquisition in the game of Go.
+
+##  Project Scope & Architecture
+
+This repository hosts the source code for **Phase I (Graduation Project I)**, creating a fully functional end-to-end pipeline from raw SGF data to visual explanation.
+
+### Key Features (Phase I Delivered)
+* ** The Brain (ResNet-18):** A Deep Residual Network modified to accept a $19 \times 19 \times 17$ input tensor, trained on 150,000+ professional games to predict moves with >80% Top-5 Accuracy.
+* ** The Light (XAI):** Implementation of **Integrated Gradients (IG)** using the Captum library to visualize pixel-level attribution.
+* ** Robust Data Pipeline:** A custom "Universal SGF Parser" capable of handling multi-encoding (UTF-8/GB18030) game records without data loss.
+* ** Interactive UI:** A reactive web application built with **Streamlit** for real-time board analysis.
+* ** Computer Vision (Experimental):** A WIP module using OpenCV for digitising physical boards via homography and adaptive thresholding.
+
+##  Roadmap
+
+### ✅ Phase I: Baseline Architecture (Jan 2026)
+* Completed data ingestion of the FoxGo Dataset (150k+ games).
+* Trained ResNet-18 baseline, achieving professional move alignment.
+* Integrated XAI layer (Integrated Gradients) for "Where" visualisation.
+* Deployed Streamlit frontend for user interaction.
+
+###  Phase II: Semantic Explainability (Feb - June 2026)
+* **Transition to Semantics:** Integration of **Grad-CAM** and **Saliency Maps** to visualise high-level shapes (e.g., "Tiger's Mouth") rather than just pixels.
+* **Topological Learning:** Experimentation with **Graph Neural Networks (GNNs)** to capture stone connectivity and "Aji".
+* **Benchmarking:** A comparative user study to validate XAI fidelity against professional intuition.
+
+### Phase III: Future Research (2026+)
+* Alignment with **COST Action CA22145 (GameTable)** research goals.
+* Advanced cognitive modelling for human-AI collaboration.
+
+##  Tech Stack
+
+* **Language:** Python 3.10+
+* **Deep Learning:** PyTorch, TorchVision
+* **XAI Library:** Captum (Integrated Gradients)
+* **Frontend:** Streamlit
+* **Computer Vision:** OpenCV (cv2)
+* **Data Processing:** NumPy, Pandas
+
+##  About the Author
+
+**İpek Naz Sipahi (Aidoneus)**
+*B.E. Candidate, Computer Engineering | Manisa Celal Bayar University*
+
+My academic focus lies in the "Main Quest" of mastering Cognitive Game AI and bridging the gap between machine logic and human intuition. This project serves as my senior graduation thesis and a foundation for future postgraduate research in Japan.
+
+* **Advisor:** Dr Gamze TÜRKMEN 
+* **Research Group:** COST Action CA22145 (GameTable) - Working Group 1 Member
+
+##  Citation & License
+
+This work is part of an ongoing academic thesis.
+* **Code:** Open for academic review.
+* **Dataset:** Utilizes the FoxGo Dataset (GPL-3.0).
+* **Rights:** All rights reserved pending the final submission of the graduation project.
 
 ---
-
-### Abstract
-
-Greetings to the seekers of logic and the architects of intelligence.
-
-This repository, **Beyond the Move**, represents the first phase of a graduation thesis dedicated to the intersection of Deep Learning and Cognitive Science. While artificial intelligence has surpassed human capability in the realm of Go, the internal reasoning of these "Black Box" models remains obscured in silence.
-
-I, Aidoneus, a student of the digital arts, have forged this project not merely to replicate the strength of machines, but to dismantle the barrier between silicon calculation and human understanding. This is a quest for **Explainable AI (XAI)**—an endeavor to translate the silent probability of a neural network into the articulate language of strategy.
-
-### Project Scope: Phase I
-
-The current iteration of this archive focuses on the foundational architecture required to analyze strategic game decisions.
-
-**The Primary Objective:**
-To construct a Deep Learning framework capable of predicting expert moves in the game of Go, serving as the bedrock for future XAI implementation.
-
-**The Roadmap:**
-* **Phase I (Current):** Data ingestion, SGF parsing, and the training of a foundational Convolutional Neural Network (CNN) to mimic professional intuition.
-* **Phase II (Upcoming 2026):** Integration of Saliency Maps and Grad-CAM techniques to visualize the "Why" behind the "Where."
-* **Phase III (Future 2027 - 2028):** Alignment with the **GameTable COST Action** research goals, focusing on the cognitive implications of AI move generation.
-
-### The Methodology
-
-This research leverages the following paradigms and technologies:
-
-* **Language:** Python
-* **Framework:** PyTorch / TensorFlow
-* **Domain:** Computer Go (Baduk/Weiqi)
-* **Key Concepts:** Supervised Learning, Pattern Recognition, Explainable Artificial Intelligence (XAI).
-
-### About the Author
-
-I am a 4th-year Computer Engineering student at Manisa Celal Bayar University. My academic focus lies in the "Main Quest" of mastering Cognitive Game AI. This project serves as both a graduation requirement and a testament to my dedication to the field.
-
-Following the completion of Phase I, I intend to apply the findings of this research to the **GameTable COST Action network**, contributing to the broader scientific dialogue regarding AI transparency in strategic games.
-
-### Citation & License
-
-This work is part of an ongoing academic thesis. While the code is visible for review by the academic community, all rights are reserved pending the final submission of the graduation project.
-
-* **Advisor:** Dr. Gamze TÜRKMEN
-* **Institution:** Manisa Celal Bayar University
-* **Timeline:** 2025 - 2026
-
----
-
-*"To play a move is to make a decision. To explain a move is to understand the mind."*
+*"To play a stone is to ask a question. To analyse it is to understand the answer."*
