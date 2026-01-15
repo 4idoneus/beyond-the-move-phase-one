@@ -1,7 +1,9 @@
 streamlit
-pandas
+torch
+torchvision
 numpy
+pandas
 matplotlib
-sgfmill
+seaborn   
+captum
 opencv-python-headless
-Pillow
